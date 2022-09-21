@@ -1,5 +1,5 @@
 let libraryArray = [];
-let bookCount = 0;
+let removeButton = document.getElementById('removeAll');
 
 let addBookButton = document.getElementById("addBook");
 let titleField = document.getElementById("title");
@@ -29,12 +29,17 @@ function createBook(){
 }
 
 function displayBookArray(array){
+    if (array.length == 0){
+        document.getElementById('libraryContainer').innerHTML = '';
+    } 
+    let bookCount = (libraryArray.length-1);
     const bookCard = document.createElement('div');
+    bookCard.setAttribute('id', bookCount);
     let titleDisplay = document.createElement('p');
     let authorDisplay = document.createElement('p');
     let pagesDisplay = document.createElement('p');
     let readDisplay = document.createElement('p')
-    array.forEach(element => {
+    array.forEach(element => {   
         titleDisplay.innerHTML = `Book Title: <br> ${element.title}`;
         authorDisplay.innerHTML = `Book Author:<br> ${element.author}`;
         pagesDisplay.innerHTML = `Number of pages: <br> ${element.pages}`;
@@ -60,7 +65,14 @@ addBookButton.addEventListener('click', ()=> {
     createBook();
     addBookToLibrary(book);
     displayBookArray(libraryArray);
+    titleField.value = '';
+    authorField.value = '';
+    pagesField.value = '';
     console.log(book.title);
     console.log(libraryArray)
     }
+})
+removeButton.addEventListener('click',()=>{
+    libraryArray = [];
+    displayBookArray(libraryArray);
 })
