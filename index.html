@@ -6,22 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="./script.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 <div class="topContainer">
     <div class="headerContainer"><h1>Your Own Personal Library Card</h1></div>
-    <div class="libraryContainer">
-        <div class="testBook">TESTING!</div>
-        <div class="testBook">TESTING!</div>
-        <div class="testBook">TESTING!</div>
-        <div class="testBook">TESTING!</div>
-        <div class="testBook">TESTING!</div>
+    <div id="libraryContainer">
+        
+        
 
 
 
     </div>
-    <div class="sidebarContainer"></div>
+    <div class="sidebarContainer">
+        <h1>Add a new book here</h1>
+        <form id="addBookForm" action="" onsubmit="return false">
+            <label id='titleLabel' for="title">Title:</label>
+            <input required type="text" name="title" id="title">
+            <label id="authorLabel" for="author">Author:</label>
+            <input required type="text" name="author" id="author">
+            <label id="pagesLabel" for="pages">Pages:</label>
+            <input required type="number" name="pages" id="pages">
+            <label id='readLabel' for="read">Have I read it: </label>
+            <input type="checkbox" name="read" id="read">
+            <button id="addBook" type="">Add Book</button>
+
+
+        </form>
+    </div>
     
 </div>
 </body>

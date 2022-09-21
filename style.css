@@ -46,7 +46,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+@font-face{
+    font-family: LibraryHeader;
+    src: url(./Saturday\ Bright.woff);
+}
+@font-face{
+    font-family: CardFont;
+    src: url(./simplicity.ttf)
+}
 *{
     --library-color: #ffcbcb;
     --card-color: #ffb5b5;
@@ -69,15 +76,17 @@ table {
     grid-column: 1/2;
     z-index: 999;
     background-color: var(--header-color);
-    box-shadow: 0px 5px 5px -5px var(--header-color);
+    box-shadow: 0px 10px 10px -7px var(--header-color);
     text-align: center;
 }
 .headerContainer>h1{
-    font-size: 3rem;
+    font-family: LibraryHeader;
+    font-size: 3.5rem;
     color: azure;
-    padding-top: 52px;
+    padding-top: 40px;
+ 
 }
-.libraryContainer{
+#libraryContainer{
     display: grid;
     grid-row: 2/3;
     grid-column: 1/2;
@@ -87,16 +96,71 @@ table {
     grid-auto-rows: 1fr;
     padding: 20px;
     gap: 10px;
-    background-color: var(--library-color);
-}
-.libraryContainer>div{
-    padding: 20px;
     background-color: var(--card-color);
+}
+#libraryContainer>div{
+    display: grid;
+    grid-template-rows: repeat(4,1fr);
+    font-size: 2rem;
+    color: var(--header-color);
+    font-family: CardFont;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--library-color);
     border-radius: 16px;
 }
 .sidebarContainer{
     display: grid;
     grid-row: 1/3;
     grid-column: 2/3;
+
+    grid-template-rows: 150px 500px;
     background-color: var(--sidebar-color);
+}
+.sidebarContainer>h1{
+    grid-row: 1/2;
+    color: azure;
+    font-size: 2rem;
+    font-family: CardFont;
+    text-align: center;
+    padding-top: 20%;
+    text-decoration: underline;
+}
+#addBookForm{
+    grid-row: 2/3;
+    display: grid;
+    gap: 30px;
+    padding: 10px;
+    grid-template-rows: repeat(5,1fr);
+    align-items: center;
+    justify-items: center;
+    color: azure;
+    font-size: 1.5rem;
+    font-family: CardFont;
+}
+#title,#titleLabel{
+    grid-row: 1/2;
+    
+}
+#author,#authorLabel{
+    grid-row: 2/3;
+    
+}
+#pages,#pagesLabel{
+    grid-row: 3/4;
+   
+}
+#read,#readLabel{
+    grid-row: 4/5;
+    
+}
+#addBook{
+    grid-row: 5/6;
+    grid-column: 1/3;
+    align-self: center;
+    justify-self: center;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-family: CardFont;
 }
