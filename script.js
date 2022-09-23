@@ -15,6 +15,14 @@ function BookConstructor(title,author,pages,read){
     this.pages = pages,
     this.read = read,
     console.log(`${title}, ${author}, ${pages}, ${read}`)
+    BookConstructor.prototype.toggleRead = function(value){
+        if (value ==  true){
+            this.read = true
+        }
+        else if (value == false){
+            this.read = false
+        }
+    }
 }
 function addBookToLibrary(book){
     libraryArray.push(book)
@@ -34,26 +42,51 @@ function displayBookArray(array){
     } 
     let bookCount = (libraryArray.length-1);
     const bookCard = document.createElement('div');
-    bookCard.setAttribute('id', bookCount);
+    bookCard.setAttribute('id', `div${bookCount}`);
     let titleDisplay = document.createElement('p');
     let authorDisplay = document.createElement('p');
     let pagesDisplay = document.createElement('p');
     let readDisplay = document.createElement('p')
-    array.forEach(element => {   
+    let readButton = document.createElement('input');
+    let removeButton = document.createElement('button');
+    array.forEach(element => {
+          
         titleDisplay.innerHTML = `Book Title: <br> ${element.title}`;
         authorDisplay.innerHTML = `Book Author:<br> ${element.author}`;
         pagesDisplay.innerHTML = `Number of pages: <br> ${element.pages}`;
-        if (element.read === true){
-            readDisplay.innerHTML = `You have read this book`;
+        if (element.read == true){
+            readDisplay.innerHTML = `You have read this book!`;
+            readButton.checked = true;
         }
         else{
-            readDisplay.innerHTML = `You have not read this book`;
+            readDisplay.innerHTML = `You have not read this book!`;
+            readButton.checked = false;
         }
         bookCard.appendChild(titleDisplay);
         bookCard.appendChild(authorDisplay);
         bookCard.appendChild(pagesDisplay);
         bookCard.appendChild(readDisplay);
-        document.getElementById('libraryContainer').appendChild(bookCard);
+        bookCard.appendChild(readButton);
+        bookCard.appendChild(removeButton);
+        removeButton.innerHTML = "REMOVE!";
+        readButton.setAttribute('type', 'checkbox');
+        readButton.addEventListener('click', () =>{
+            console.log(readButton.checked);
+            element.toggleRead(readButton.checked)
+            if (element.read === true){
+                readDisplay.innerHTML = `You have read this book!`;
+            }
+            else if (element.read === false){
+                readDisplay.innerHTML = `You have not read this book!`;
+            }
+        })
+        document.getElementById('libraryContainer').appendChild(bookCard)
+        let thisDiv = document.getElementById(`div${bookCount}`);
+        removeButton.addEventListener('click', function handleClick(event) {
+            thisDiv.remove();
+            array.splice(bookCount,1);
+          });
+        console.log(thisDiv);
     });
 }
 
