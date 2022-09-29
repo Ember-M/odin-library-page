@@ -1,21 +1,22 @@
 let libraryArray = [];
-let removeButton = document.getElementById('removeAll');
-
-let addBookButton = document.getElementById("addBook");
-let titleField = document.getElementById("title");
-let authorField = document.getElementById('author');
-let pagesField = document.getElementById('pages');
-let readField = document.getElementById('read');
-
+const removeButton = document.getElementById('removeAll');
+const addBookButton = document.getElementById("addBook");
+const titleField = document.getElementById("title");
+const authorField = document.getElementById('author');
+const pagesField = document.getElementById('pages');
+const readField = document.getElementById('read');
 
 
-function BookConstructor(title,author,pages,read){
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read,
-    console.log(`${title}, ${author}, ${pages}, ${read}`)
-    BookConstructor.prototype.toggleRead = function(value){
+
+class BookConstructor{
+    constructor(title,author,pages,read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    
+    toggleRead(value){
         if (value ==  true){
             this.read = true
         }
@@ -24,16 +25,8 @@ function BookConstructor(title,author,pages,read){
         }
     }
 }
-function addBookToLibrary(book){
-    libraryArray.push(book)
-}
-
 function createBook(){
-    let title = titleField.value;
-    let author = authorField.value;
-    let pages = pagesField.value;
-    let read = readField.checked;
-    book = new BookConstructor(title, author, pages, read)
+    book = new BookConstructor(titleField.value, authorField.value, pagesField.value,readField.checked)
 }
 
 function displayBookArray(array){
@@ -59,15 +52,10 @@ function displayBookArray(array){
             readButton.checked = true;
         }
         else{
-            readDisplay.innerHTML = `You have not read this book!`;
+            readDisplay.innerHTML = `You have not read this book`;
             readButton.checked = false;
         }
-        bookCard.appendChild(titleDisplay);
-        bookCard.appendChild(authorDisplay);
-        bookCard.appendChild(pagesDisplay);
-        bookCard.appendChild(readDisplay);
-        bookCard.appendChild(readButton);
-        bookCard.appendChild(removeButton);
+        bookCard.append(titleDisplay, authorDisplay, pagesDisplay, readDisplay,readButton,removeButton);
         removeButton.innerHTML = "REMOVE!";
         readButton.setAttribute('type', 'checkbox');
         readButton.addEventListener('click', () =>{
@@ -96,7 +84,7 @@ addBookButton.addEventListener('click', ()=> {
     }
     else{
     createBook();
-    addBookToLibrary(book);
+    libraryArray.push(book);
     displayBookArray(libraryArray);
     titleField.value = '';
     authorField.value = '';
